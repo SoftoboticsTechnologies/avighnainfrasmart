@@ -30,7 +30,7 @@
 | WhatsApp button → wa.me/919980993995 | ✅ |
 | About page: About Company + 4 points, Meet Our Founder (quote, 2 people), Our History, Reason For Choosing Us (3 cards) | ✅ |
 | Projects page: "Our Projects", "Inspiration for Your Next Project", "Our Project", 3 project tiles | ✅ |
-| Contact page: "Get In Touch", "Any Question? Write Down And Send Us", form #13, Main Office (Bangalore / Make a Call / Send a Mail) | ✅ |
+| Contact page: "Get In Touch", "Any Question? Write Down And Send Us", form #13, Main Office (Bangalore) / Make a Call / Send a Mail, Google Map | ✅ The map was missing from the first rebuild. It is now restored with the original embed URL, unchanged. |
 | Aarna Royal page: intro, highlights, 3 USPs, 2 testimonials, 2 closing sections | ✅ |
 | Avighna Aarna Vintage page: intro, highlights, key features, amenities, location, why choose | ✅ |
 

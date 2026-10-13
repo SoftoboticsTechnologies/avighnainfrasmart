@@ -76,11 +76,17 @@
     </div>
   </section>
 
-  <section class="section">
-    <div class="container contact-page">
+  <section class="section section--mist contact-main" aria-labelledby="contact-form-title">
+    <div class="container">
       <div class="contact-card" data-reveal>
-        <p class="eyebrow">Get In Touch</p>
-        <h2>Any Question?<br> Write Down And Send Us</h2>
+        <div class="contact-card__intro">
+          <picture>
+            <source type="image/webp" srcset="../assets/images/aarna-royal-600.webp 600w, ../assets/images/aarna-royal-1184.webp 1184w" sizes="(max-width: 1023px) 100vw, 480px">
+            <img class="contact-card__bg" src="../assets/images/aarna-royal-758.jpeg" alt="" width="758" height="1024" loading="lazy">
+          </picture>
+          <p class="eyebrow">Get In Touch</p>
+          <h2 id="contact-form-title">Any Question?<br> Write Down And Send Us</h2>
+        </div>
         <form class="form" id="wpforms-form-13" method="post" action="https://avighnainfrasmart.com/contact-us/" novalidate
               data-wpforms-id="13" data-wpforms-base="https://avighnainfrasmart.com/" data-wpforms-page="contact-us/" data-form-title="Get A Free Quote">
           <div class="form__row">
@@ -125,30 +131,37 @@
         </form>
       </div>
 
-      <aside class="office-cards" aria-labelledby="main-office" data-reveal>
-        <p class="eyebrow" id="main-office">Main Office</p>
-        <div class="office-card">
-          <span class="icon-badge"><svg class="icon" aria-hidden="true"><use href="../assets/images/icons.svg#i-solid-location-arrow"></use></svg></span>
-          <div>
-            <h3>Bangalore</h3>
-            <address><p>No: 1331 SHREE Manjunatha building 11th cross no 201, 2nd floor, shree Ananthnagar phase 2, electronic City, Bangalore 560100</p></address>
+      <ul class="info-cards" aria-label="Contact details">
+        <li class="info-card" data-reveal>
+          <h3 class="info-card__label">Main Office</h3>
+          <div class="info-card__body">
+            <span class="icon-badge"><svg class="icon" aria-hidden="true"><use href="../assets/images/icons.svg#i-solid-location-arrow"></use></svg></span>
+            <div>
+              <h4>Bangalore</h4>
+              <address>No: 1331 SHREE Manjunatha building 11th cross no 201, 2nd floor, shree Ananthnagar phase 2, electronic City, Bangalore 560100</address>
+            </div>
           </div>
-        </div>
-        <div class="office-card">
-          <span class="icon-badge"><svg class="icon" aria-hidden="true"><use href="../assets/images/icons.svg#i-solid-phone-alt"></use></svg></span>
-          <div>
-            <h3>Make a Call</h3>
-            <a href="tel:+919980993995">+91 9980993995</a>
+        </li>
+        <li class="info-card" data-reveal>
+          <h3 class="info-card__label">Make a Call</h3>
+          <div class="info-card__body">
+            <span class="icon-badge"><svg class="icon" aria-hidden="true"><use href="../assets/images/icons.svg#i-solid-phone-alt"></use></svg></span>
+            <a class="info-card__link" href="tel:+919980993995">+91 9980993995</a>
           </div>
-        </div>
-        <div class="office-card">
-          <span class="icon-badge"><svg class="icon" aria-hidden="true"><use href="../assets/images/icons.svg#i-regular-envelope"></use></svg></span>
-          <div>
-            <h3>Send a Mail</h3>
-            <a href="mailto:avighnainfrasmart@gmail.com">avighnainfrasmart@gmail.com</a>
+        </li>
+        <li class="info-card" data-reveal>
+          <h3 class="info-card__label">Send a Mail</h3>
+          <div class="info-card__body">
+            <span class="icon-badge"><svg class="icon" aria-hidden="true"><use href="../assets/images/icons.svg#i-regular-envelope"></use></svg></span>
+            <a class="info-card__link" href="mailto:avighnainfrasmart@gmail.com">avighnainfrasmart@<wbr>gmail.com</a>
           </div>
-        </div>
-      </aside>
+        </li>
+      </ul>
+
+      <!-- Original Google Maps embed from the live page, URL unchanged (including its trailing %E2%80%8B). -->
+      <div class="contact-map" data-reveal>
+        <iframe src="https://maps.google.com/maps?q=No%3A%201331%20SHREE%20Manjunatha%20building%2011th%20cross%20no%20201%2C%202nd%20floor%2C%20shree%20Ananthnagar%20phase%202%2C%20electronic%20City%2C%20Bangalore%20560100%E2%80%8B&amp;t=m&amp;z=10&amp;output=embed&amp;iwloc=near" title="Map: No: 1331 SHREE Manjunatha building 11th cross no 201, 2nd floor, shree Ananthnagar phase 2, electronic City, Bangalore 560100" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+      </div>
     </div>
   </section>
 

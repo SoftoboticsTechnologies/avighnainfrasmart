@@ -75,41 +75,59 @@
     </div>
   </section>
 
-  <section class="section" aria-labelledby="projects-intro">
+  <section class="section projects-page" aria-labelledby="projects-intro">
     <div class="container">
       <div class="section-head section-head--center" data-reveal>
         <p class="eyebrow eyebrow--center">Our Projects</p>
         <h2 id="projects-intro">Inspiration for Your Next Project</h2>
       </div>
 
-      <h2 class="subhead" data-reveal>Our Project</h2>
-      <div class="showcase-grid">
-        <article class="showcase" data-reveal>
-          <picture>
-            <source type="image/webp" srcset="../assets/images/aarna-royal-600.webp 600w, ../assets/images/aarna-royal-1184.webp 1184w" sizes="(max-width: 767px) 92vw, (max-width: 1023px) 46vw, 380px">
-            <img class="showcase__bg" src="../assets/images/aarna-royal-758.jpeg" alt="Aarna Royal building exterior" width="758" height="1024" loading="lazy">
-          </picture>
-          <span class="icon-badge"><svg class="icon" aria-hidden="true"><use href="../assets/images/icons.svg#i-regular-building"></use></svg></span>
-          <h3>Aarna Royal</h3>
-          <a class="link-arrow" href="../aarna-royal/">Know more <svg class="icon" aria-hidden="true"><use href="../assets/images/icons.svg#i-solid-arrow-right"></use></svg></a>
-        </article>
-        <article class="showcase" data-reveal>
-          <picture>
-            <source type="image/webp" srcset="../assets/images/aarna-vintage-800.webp 800w, ../assets/images/aarna-vintage-1600.webp 1600w" sizes="(max-width: 767px) 92vw, (max-width: 1023px) 46vw, 380px">
-            <img class="showcase__bg" src="../assets/images/aarna-vintage-1024.jpeg" alt="Avighna Aarna Vintage building exterior" width="1024" height="895" loading="lazy">
-          </picture>
-          <span class="icon-badge"><svg class="icon" aria-hidden="true"><use href="../assets/images/icons.svg#i-regular-id-badge"></use></svg></span>
-          <h3>Avighna Aarna Vintage</h3>
-          <a class="link-arrow" href="../avighna-aarna-vintage/">KNOWN MORE <svg class="icon" aria-hidden="true"><use href="../assets/images/icons.svg#i-solid-arrow-right"></use></svg></a>
-        </article>
-        <article class="showcase" data-reveal>
-          <!-- No photograph exists for this project on the original site. -->
-          <div class="brand-tile brand-tile--dark"><img src="../assets/images/avighna-logo-300.png" alt="" width="300" height="139" loading="lazy"></div>
-          <span class="icon-badge"><svg class="icon" aria-hidden="true"><use href="../assets/images/icons.svg#i-regular-newspaper"></use></svg></span>
-          <h3>Anant nagar electronic City</h3>
-          <a class="link-arrow" href="../contact-us/">Known MORE <svg class="icon" aria-hidden="true"><use href="../assets/images/icons.svg#i-solid-arrow-right"></use></svg></a>
-        </article>
-      </div>
+      <h2 class="subhead" id="our-project" data-reveal>Our Project</h2>
+      <ul class="gallery" aria-labelledby="our-project">
+        <li class="gallery__item" data-reveal>
+          <article class="project-card project-card--gallery">
+            <a class="project-card__media project-card__media--royal" href="../aarna-royal/" tabindex="-1" aria-hidden="true">
+              <picture>
+                <source type="image/webp" srcset="../assets/images/aarna-royal-600.webp 600w, ../assets/images/aarna-royal-1184.webp 1184w" sizes="(max-width: 767px) 92vw, (max-width: 1023px) 46vw, 390px">
+                <img src="../assets/images/aarna-royal-758.jpeg" alt="Aarna Royal building exterior" width="758" height="1024" loading="lazy">
+              </picture>
+            </a>
+            <div class="project-card__body">
+              <span class="icon-badge"><svg class="icon" aria-hidden="true"><use href="../assets/images/icons.svg#i-regular-building"></use></svg></span>
+              <h3>Aarna Royal</h3>
+              <a class="btn btn--outline project-card__cta" href="../aarna-royal/">Know more <svg class="icon" aria-hidden="true"><use href="../assets/images/icons.svg#i-solid-arrow-right"></use></svg></a>
+            </div>
+          </article>
+        </li>
+        <li class="gallery__item" data-reveal>
+          <article class="project-card project-card--gallery">
+            <a class="project-card__media" href="../avighna-aarna-vintage/" tabindex="-1" aria-hidden="true">
+              <picture>
+                <source type="image/webp" srcset="../assets/images/aarna-vintage-800.webp 800w, ../assets/images/aarna-vintage-1600.webp 1600w" sizes="(max-width: 767px) 92vw, (max-width: 1023px) 46vw, 390px">
+                <img src="../assets/images/aarna-vintage-1024.jpeg" alt="Avighna Aarna Vintage building exterior" width="1024" height="895" loading="lazy">
+              </picture>
+            </a>
+            <div class="project-card__body">
+              <span class="icon-badge"><svg class="icon" aria-hidden="true"><use href="../assets/images/icons.svg#i-regular-id-badge"></use></svg></span>
+              <h3>Avighna Aarna Vintage</h3>
+              <a class="btn btn--outline project-card__cta" href="../avighna-aarna-vintage/">KNOWN MORE <svg class="icon" aria-hidden="true"><use href="../assets/images/icons.svg#i-solid-arrow-right"></use></svg></a>
+            </div>
+          </article>
+        </li>
+        <li class="gallery__item" data-reveal>
+          <article class="project-card project-card--gallery">
+            <!-- Original photo (uploads/2025/06/cf5aeab0718c553.png) returns 404 on the live site; brand tile shown instead. -->
+            <a class="project-card__media" href="../contact-us/" tabindex="-1" aria-hidden="true">
+              <span class="brand-tile"><img src="../assets/images/avighna-logo.png" alt="" width="768" height="356" loading="lazy"></span>
+            </a>
+            <div class="project-card__body">
+              <span class="icon-badge"><svg class="icon" aria-hidden="true"><use href="../assets/images/icons.svg#i-regular-newspaper"></use></svg></span>
+              <h3>Anant nagar electronic City</h3>
+              <a class="btn btn--outline project-card__cta" href="../contact-us/">Known MORE <svg class="icon" aria-hidden="true"><use href="../assets/images/icons.svg#i-solid-arrow-right"></use></svg></a>
+            </div>
+          </article>
+        </li>
+      </ul>
     </div>
   </section>
 
