@@ -1,0 +1,11 @@
+{
+  "name": "avighnainfrasmart",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Static website for Avighna Infrasmart (redesign of avighnainfrasmart.com)",
+  "type": "module",
+  "scripts": {
+    "start": "node scripts/serve.mjs 8080",
+    "sync": "node scripts/sync-partials.mjs"
+  }
+}

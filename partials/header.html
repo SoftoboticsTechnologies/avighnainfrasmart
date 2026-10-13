@@ -1,0 +1,45 @@
+<a class="skip-link" href="#content">Skip to content</a>
+<div class="topbar">
+  <div class="container topbar__inner">
+    <ul class="topbar__contact">
+      <li><a href="tel:+919980993995"><svg class="icon" aria-hidden="true"><use href="{{root}}assets/images/icons.svg#i-solid-phone-alt"></use></svg><span>9980993995</span></a></li>
+      <li><a href="mailto:avighnainfrasmart@gmail.com"><svg class="icon" aria-hidden="true"><use href="{{root}}assets/images/icons.svg#i-solid-envelope"></use></svg><span>avighnainfrasmart@gmail.com</span></a></li>
+    </ul>
+    <div class="social social--topbar">{{social}}</div>
+  </div>
+</div>
+<header class="site-header" data-header>
+  <div class="container site-header__inner">
+    <a class="brand" href="{{root}}" aria-label="Avighna Infrasmart – Home">
+      <img src="{{root}}assets/images/avighna-logo.png" alt="Avighna Infrasmart" width="768" height="356">
+    </a>
+    <nav class="primary-nav" aria-label="Primary">
+      <ul>
+        <li><a href="{{root}}"{{current:home}}>Home</a></li>
+        <li><a href="{{root}}about/"{{current:about}}>About</a></li>
+        <li><a href="{{root}}projects/"{{current:projects}}>Projects</a></li>
+        <li><a href="{{root}}contact-us/"{{current:contact}}>Contact Us</a></li>
+      </ul>
+    </nav>
+    <a class="btn btn--primary site-header__cta" href="{{root}}contact-us/">Get a Quote</a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="mobile-menu" aria-label="Main menu toggle" data-nav-toggle>
+      <span class="nav-toggle__bar"></span><span class="nav-toggle__bar"></span><span class="nav-toggle__bar"></span>
+    </button>
+  </div>
+  <div class="mobile-menu" id="mobile-menu" data-mobile-menu hidden>
+    <nav class="container" aria-label="Mobile">
+      <ul class="mobile-menu__links">
+        <li><a href="{{root}}"{{current:home}}>Home</a></li>
+        <li><a href="{{root}}about/"{{current:about}}>About</a></li>
+        <li><a href="{{root}}projects/"{{current:projects}}>Projects</a></li>
+        <li><a href="{{root}}contact-us/"{{current:contact}}>Contact Us</a></li>
+      </ul>
+      <a class="btn btn--primary btn--block" href="{{root}}contact-us/">Get a Quote</a>
+      <div class="mobile-menu__contact">
+        <a href="tel:+919980993995"><svg class="icon" aria-hidden="true"><use href="{{root}}assets/images/icons.svg#i-solid-phone-alt"></use></svg>9980993995</a>
+        <a href="mailto:avighnainfrasmart@gmail.com"><svg class="icon" aria-hidden="true"><use href="{{root}}assets/images/icons.svg#i-solid-envelope"></use></svg>avighnainfrasmart@gmail.com</a>
+      </div>
+      <div class="social social--menu">{{social}}</div>
+    </nav>
+  </div>
+</header>
