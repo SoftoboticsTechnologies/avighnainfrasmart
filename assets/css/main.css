@@ -728,8 +728,20 @@ a.social__item:hover { background: rgba(255, 255, 255, .18); color: inherit; }
 .footer-contact a:hover { color: var(--orange-bright); }
 .social--footer .social__item { width: 40px; height: 40px; background: rgba(255, 255, 255, .08); color: #fff; }
 .social--footer a.social__item:hover { background: var(--orange); }
-.site-footer__bottom { border-top: 1px solid rgba(255, 255, 255, .1); padding-block: 22px; font-size: .9375rem; }
+.site-footer__bottom { border-top: 1px solid rgba(255, 255, 255, .1); padding-block: 22px 92px; font-size: .9375rem; } /* bottom padding keeps the row clear of the fixed WhatsApp button */
 .site-footer__bottom p { margin: 0; text-align: center; }
+.site-footer__bottom-inner { display: flex; align-items: center; justify-content: space-between; gap: 12px 24px; }
+.site-footer__bottom-inner p { text-align: left; }
+
+/* "Powered by" attribution; the logo sits on a white chip (like .footer-logo) so its blue stays legible on the dark footer */
+.powered-by-dripfunnel {
+  display: inline-flex; align-items: center; justify-content: flex-end; gap: 6px; flex-shrink: 0;
+  color: inherit; font-size: 12px; line-height: 1.4; text-decoration: none; white-space: nowrap; transition: opacity .2s ease;
+}
+.powered-by-dripfunnel__logo { display: block; padding: 4px 8px; border-radius: 6px; background: #fff; }
+.powered-by-dripfunnel img { display: block; width: auto; height: auto; max-width: 110px; max-height: 26px; object-fit: contain; }
+.powered-by-dripfunnel:hover { color: inherit; opacity: .8; }
+.powered-by-dripfunnel:focus-visible { outline: 2px solid currentColor; outline-offset: 4px; border-radius: 4px; }
 
 /* ---------- WhatsApp ---------- */
 .whatsapp-float {
@@ -832,7 +844,10 @@ a.social__item:hover { background: rgba(255, 255, 255, .18); color: inherit; }
   .project-card--gallery .project-card__body { padding: 0 22px 24px; }
 
   .site-footer__grid { grid-template-columns: 1fr; }
-  .site-footer__bottom { padding-bottom: 92px; } /* keep copyright clear of the WhatsApp button */
+  .site-footer__bottom-inner { flex-direction: column; }
+  .site-footer__bottom-inner p { text-align: center; }
+  .powered-by-dripfunnel { font-size: 11px; gap: 5px; }
+  .powered-by-dripfunnel img { max-width: 95px; max-height: 23px; }
   .whatsapp-float { right: 16px; bottom: 16px; width: 58px; height: 58px; padding: 0; justify-content: center; }
   .whatsapp-float__label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 }
