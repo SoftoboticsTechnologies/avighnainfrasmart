@@ -42,7 +42,24 @@ scripts/serve.mjs          Local preview server
 
 ## Enquiry forms
 
-The two forms are the original WPForms forms: **#15 "Send Request"** on the home page and **#13 "Get A Free Quote"**, which appears on the home page and the contact page. Field names and hidden fields are identical, so submissions arrive in the existing WPForms entries and email notifications.
+### Contact page — Contact Form API
+
+The form on `/contact-us/` posts JSON to the Contact Form API (`data-api-endpoint` on the `<form>`):
+
+```
+POST https://k5iewetbri.execute-api.ap-south-1.amazonaws.com/prod/contact
+Content-Type: application/json
+
+{ "firstName": "…", "email": "…", "phoneNumber": "…", "message": "…" }
+```
+
+The optional Service Description is prepended to `message` because the API documents only these four fields. The API replies `{ "success": bool, "data": …, "errors": [ … ] }`; the visitor sees a success message only for HTTP 2xx with `success: true`. Anything else (including timeouts after 15 s) shows an error, keeps what they typed, and offers email/call/WhatsApp links. The API's error text is logged to the console for developers, never shown to visitors.
+
+**Origin registration:** the API checks the browser's `Origin` header and answers `403 Domain '…' is not allowed` for unregistered sites. Every domain the site is served from (production, `www.`, staging, and `localhost` for local testing) must be added to the API provider's domain mapping.
+
+### Home page — WPForms
+
+The home page forms are the original WPForms forms: **#15 "Send Request"** and **#13 "Get A Free Quote"**. Field names and hidden fields are identical, so submissions arrive in the existing WPForms entries and email notifications.
 
 WPForms needs a fresh anti-spam token on every submission. `forms.js` reads the live form from WordPress, then posts to WordPress's own `admin-ajax.php`. Browsers only allow this when the static site is served from the same origin as WordPress, because WordPress sends no CORS headers.
 

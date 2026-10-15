@@ -10,6 +10,11 @@
  * (the WordPress server sends no CORS headers). Otherwise — or on any error — the
  * visitor is told plainly that the message was NOT sent and is offered email,
  * phone and WhatsApp alternatives pre-filled with what they typed.
+ *
+ * Forms with a data-api-endpoint attribute (the contact page) instead POST JSON to
+ * the Contact Form API: { firstName, email, phoneNumber, message }. The API answers
+ * { success, data, errors[] } and only accepts registered website origins; anything
+ * other than HTTP 2xx with success === true is treated as NOT sent.
  */
 (function () {
   'use strict';
@@ -19,7 +24,11 @@
   var WHATSAPP = '919980993995';
   var MSG_REQUIRED = 'This field is required.';          // original WPForms wording
   var MSG_EMAIL = 'Please enter a valid email address.';  // original WPForms wording
+  var MSG_PHONE = 'Please enter a valid phone number.';
+  var MSG_SENT = 'Thank you! Your message has been sent successfully. Our team will get back to you.';
+  var MSG_FAILED = 'We couldn’t send your message right now. Please try again in a moment.';
   var TIMEOUT = 10000;
+  var API_TIMEOUT = 15000;
 
   function fieldError(field, message) {
     var wrap = field.closest('.field');
@@ -29,6 +38,12 @@
     field.setAttribute('aria-invalid', message ? 'true' : 'false');
   }
 
+  // Any country: optional leading +, then digits with common separators, 7–15 digits (E.164 max).
+  function isPhone(value) {
+    var digits = value.replace(/\D/g, '');
+    return /^\+?[\d\s().-]+$/.test(value) && digits.length >= 7 && digits.length <= 15;
+  }
+
   function validate(form) {
     var firstInvalid = null;
     form.querySelectorAll('input:not([type="hidden"]), textarea').forEach(function (field) {
@@ -36,6 +51,7 @@
       var message = '';
       if (field.required && !value) message = MSG_REQUIRED;
       else if (field.type === 'email' && value && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) message = MSG_EMAIL;
+      else if (field.type === 'tel' && value && !isPhone(value)) message = MSG_PHONE;
       fieldError(field, message);
       if (message && !firstInvalid) firstInvalid = field;
     });
@@ -60,13 +76,15 @@
     status.focus();
   }
 
-  function showFallback(form) {
+  function showFallback(form, lead) {
     var title = form.getAttribute('data-form-title') || 'Enquiry';
     var body = summary(form);
     var mail = 'mailto:' + EMAIL + '?subject=' + encodeURIComponent(title + ' – website enquiry') + '&body=' + encodeURIComponent(body);
     var wa = 'https://wa.me/' + WHATSAPP + '?text=' + encodeURIComponent(title + '\n' + body);
     showStatus(form, 'error',
-      '<p><strong>Your request could not be sent online right now.</strong> Please contact us directly — your details are pre-filled:</p>' +
+      (lead
+        ? '<p><strong>' + lead + '</strong> You can also contact us directly — your details are pre-filled:</p>'
+        : '<p><strong>Your request could not be sent online right now.</strong> Please contact us directly — your details are pre-filled:</p>') +
       '<div class="form__fallback">' +
       '<a href="' + mail + '">Email us</a>' +
       '<a href="tel:' + PHONE + '">Call +91 9980993995</a>' +
@@ -119,29 +137,72 @@
       .finally(function () { clearTimeout(timer); });
   }
 
-  document.querySelectorAll('form[data-wpforms-id]').forEach(function (form) {
+  function value(form, name) {
+    var field = form.elements[name];
+    return field ? field.value.trim() : '';
+  }
+
+  function submitToApi(form) {
+    var service = value(form, 'serviceDescription');
+    // The API documents four fields only, so the optional service description travels inside the message.
+    var payload = {
+      firstName: value(form, 'firstName'),
+      email: value(form, 'email'),
+      phoneNumber: value(form, 'phoneNumber'),
+      message: (service ? 'Service Description: ' + service + '\n\n' : '') + value(form, 'message')
+    };
+
+    var controller = new AbortController();
+    var timer = setTimeout(function () { controller.abort(); }, API_TIMEOUT);
+
+    // The browser adds the Origin header itself; the API uses it to check the site is registered.
+    return fetch(form.getAttribute('data-api-endpoint'), {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
+      signal: controller.signal
+    })
+      .then(function (res) {
+        return res.json().catch(function () { return null; }).then(function (json) {
+          if (res.ok && json && json.success === true) return MSG_SENT;
+          // Details are for developers only (e.g. "Domain 'x' is not allowed"), never shown to visitors.
+          console.warn('[contact form] Submission not accepted (HTTP ' + res.status + '):', json && json.errors);
+          throw new Error('rejected');
+        });
+      })
+      .finally(function () { clearTimeout(timer); });
+  }
+
+  document.querySelectorAll('form[data-wpforms-id], form[data-api-endpoint]').forEach(function (form) {
+    var useApi = form.hasAttribute('data-api-endpoint');
+    var sending = false;
+
     form.addEventListener('input', function (e) {
       if (e.target.closest('.field.has-error')) fieldError(e.target, '');
     });
 
     form.addEventListener('submit', function (e) {
       e.preventDefault();
-      if (!validate(form)) return;
+      if (sending || !validate(form)) return;
 
       var button = form.querySelector('[type="submit"]');
       var label = button.innerHTML;
+      sending = true;
       button.disabled = true;
-      button.textContent = 'Sending…';
+      button.innerHTML = '<span class="btn__spinner" aria-hidden="true"></span>Sending…';
+      form.setAttribute('aria-busy', 'true');
 
-      submitToWpforms(form)
+      (useApi ? submitToApi(form) : submitToWpforms(form))
         .then(function (message) {
           showStatus(form, 'success', '<p>' + message.replace(/</g, '&lt;') + '</p>');
           form.reset();
         })
-        .catch(function () { showFallback(form); })
+        .catch(function () { showFallback(form, useApi ? MSG_FAILED : null); })
         .then(function () {
+          sending = false;
           button.disabled = false;
           button.innerHTML = label;
+          form.removeAttribute('aria-busy');
         });
     });
   });

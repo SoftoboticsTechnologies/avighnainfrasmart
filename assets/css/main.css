@@ -315,7 +315,7 @@ a.social__item:hover { background: rgba(255, 255, 255, .18); color: inherit; }
 /* ---------- Forms ---------- */
 .form { display: grid; gap: 18px; }
 .form__row { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
-.field { display: grid; gap: 7px; min-width: 0; }
+.field { display: grid; gap: 7px; min-width: 0; align-content: start; } /* keep paired inputs aligned when only one shows an error */
 .field label { font-family: var(--font-head); font-size: .875rem; font-weight: 500; color: var(--navy); }
 .field .req { color: var(--crimson); margin-left: 2px; }
 .field input, .field textarea {
@@ -344,6 +344,18 @@ a.social__item:hover { background: rgba(255, 255, 255, .18); color: inherit; }
   background: #fff; border: 1px solid currentColor; color: inherit; font-weight: 600; text-decoration: none; font-size: .9rem;
 }
 .form__fallback a:hover { background: rgba(255, 255, 255, .6); }
+.form__fallback a:focus-visible { outline: 2px solid currentColor; outline-offset: 2px; }
+.form__status:focus { outline: none; }
+.form__status--success p:last-child { margin-bottom: 0; }
+.form__note { margin: 0; font-size: .875rem; color: var(--muted); }
+.form__note .req { color: var(--crimson); }
+.form .btn[type="submit"]:focus-visible { outline: 3px solid var(--blue); outline-offset: 3px; }
+.btn__spinner {
+  width: 1em; height: 1em; flex: none; border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, .45); border-top-color: #fff; animation: btn-spin .7s linear infinite;
+}
+@keyframes btn-spin { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) { .btn__spinner { animation-duration: 1.6s; } }
 
 /* ---------- About (home) ---------- */
 .about-grid { display: grid; grid-template-columns: minmax(0, .95fr) minmax(0, 1.05fr); gap: clamp(48px, 7vw, 96px); align-items: center; }
